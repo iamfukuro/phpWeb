@@ -17,9 +17,9 @@ include 'layout.php';
     <h3>Галерея</h3>
 
     <?php
-    $sec = date("s");
-    $photo1 = ($sec % 2 == 0) ? "images/photo1.jpg" : "images/photo2.jpg";
-    $photo2 = ($sec % 2 == 0) ? "images/photo3.jpg" : "images/photo4.jpg";
+        $sec = date("s");
+        $photo1 = ($sec % 2 == 0) ? "images/photo1.jpg" : "images/photo2.jpg";
+        $photo2 = ($sec % 2 == 0) ? "images/photo3.jpg" : "images/photo4.jpg";
     ?>
 
     <figure class="photo">

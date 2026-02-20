@@ -1,7 +1,7 @@
 <?php
-$title = "Главная — Новости Формулы 1";
-$current = "index";
-include 'layout.php';
+    $title = "Главная — Новости Формулы 1";
+    $current = "index";
+    include 'layout.php';
 ?>
 
 <section class="card">
@@ -9,13 +9,13 @@ include 'layout.php';
 
     <table class="result-table">
 
-        <?php
-        echo "<tr>
+        <?php echo
+            "<tr>
                 <th>Позиция</th>
                 <th>Пилот</th>
                 <th>Команда</th>
                 <th>Очки</th>
-              </tr>";
+            </tr>";
         ?>
 
         <tr>
@@ -50,9 +50,9 @@ include 'layout.php';
     <h3>Фотографии этапа</h3>
 
     <?php
-    $sec = date("s");
-    $photo1 = ($sec % 2 == 0) ? "images/photo1.jpg" : "images/photo2.jpg";
-    $photo2 = ($sec % 2 == 0) ? "images/photo3.jpg" : "images/photo4.jpg";
+        $sec = date("s");
+        $photo1 = ($sec % 2 == 0) ? "images/photo1.jpg" : "images/photo2.jpg";
+        $photo2 = ($sec % 2 == 0) ? "images/photo3.jpg" : "images/photo4.jpg";
     ?>
 
     <figure class="photo">
