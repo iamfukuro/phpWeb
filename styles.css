@@ -97,6 +97,38 @@ main.content{
   padding-bottom: 120px; /* пространство под футер */
   min-height: calc(100vh - 216px);
 }
+.result{
+    width:300px;
+    height:60px;
+    border:2px solid #000;
+    margin:20px auto;
+    text-align:center;
+    font-size:28px;
+    line-height:60px;
+}
+
+.keyboard{
+    width:320px;
+    margin:auto;
+    display:grid;
+    grid-template-columns:repeat(5,1fr);
+    gap:10px;
+}
+
+.keyboard a{
+    display:block;
+    text-align:center;
+    padding:15px;
+    border:1px solid black;
+    text-decoration:none;
+    font-size:20px;
+    background:#eee;
+}
+
+.reset{
+    grid-column: span 5;
+    background:#ffcccc;
+}
 
 /* секции и заголовки */
 h2{ color:#fff; font-size:20px; margin:0 0 12px 0; }
