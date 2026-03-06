@@ -1,67 +1,131 @@
 <?php
-    $title = "Главная — Новости Формулы 1";
-    $current = "index";
-    include 'layout.php';
+$title = "Ильенков Иван Владленович, 241-351, ЛР 2 вар.6";
+$current = "index";
+include 'layout.php';
 ?>
 
 <section class="card">
-    <h2>Итоги последнего Гран-При</h2>
+<h2>Вычисление функции (вариант 6)</h2>
 
-    <table class="result-table">
+<?php
+    
+$x = -10;           // начальное значение
+$encounting = 30;   // количество вычислений
+$step = 2;          // шаг
+$type = 'E';        // тип верстки A–E
 
-        <?php echo
-            "<tr>
-                <th>Позиция</th>
-                <th>Пилот</th>
-                <th>Команда</th>
-                <th>Очки</th>
-            </tr>";
-        ?>
+$min_value = -1000;
+$max_value = 1000;
 
-        <tr>
-            <td><?php echo "1"; ?></td>
-            <td><?php echo "Max Verstappen"; ?></td>
-            <td><?php echo "Red Bull Racing"; ?></td>
-            <td><?php echo "25"; ?></td>
-        </tr>
+/* функция варианта 6 */
+function f($x){
 
-        <tr>
-            <td><?php echo "2"; ?></td>
-            <td><?php echo "Oscar Piastri"; ?></td>
-            <td><?php echo "McLaren"; ?></td>
-            <td><?php echo "18"; ?></td>
-        </tr>
+    if($x <= 10){
+        return 0.33 * $x * $x + 4;
+    }
 
-        <tr>
-            <td><?php echo "3"; ?></td>
-            <td><?php echo "Lando Norris"; ?></td>
-            <td><?php echo "McLaren"; ?></td>
-            <td><?php echo "15"; ?></td>
-        </tr>
+    elseif($x < 20){
+        return 18 * $x - 3;
+    }
 
-    </table>
+    else{
+        $den = $x * 0.1 - 2;
 
-    <p>
-        Победу одержал Max Verstappen, продемонстрировав стабильный темп на протяжении всей дистанции.
-    </p>
+        if(abs($den) < 0.000001){
+            return "error";
+        }
+
+        return 1 / $den + 3;
+    }
+
+}
+
+/* статистика */
+$sum = 0;
+$count = 0;
+$min = null;
+$max = null;
+
+/* подготовка вывода */
+if($type == 'B') echo "<ul>";
+if($type == 'C') echo "<ol>";
+if($type == 'D') echo "<table class='result-table'><tr><th>#</th><th>x</th><th>f(x)</th></tr>";
+if($type == 'E') echo "<div>";
+
+$currentX = $x;
+
+/* цикл */
+for($i=0; $i<$encounting; $i++){
+
+    $value = f($currentX);
+
+    if($value !== "error"){
+        $value = round($value,3);
+
+        $sum += $value;
+        $count++;
+
+        if($min === null || $value < $min) $min = $value;
+        if($max === null || $value > $max) $max = $value;
+    }
+
+    $text = "f($currentX) = $value";
+
+    if($type == 'A'){
+        echo $text."<br>";
+    }
+
+    elseif($type == 'B'){
+        echo "<li>$text</li>";
+    }
+
+    elseif($type == 'C'){
+        echo "<li>$text</li>";
+    }
+
+    elseif($type == 'D'){
+        echo "<tr><td>".($i+1)."</td><td>$currentX</td><td>$value</td></tr>";
+    }
+
+    elseif($type == 'E'){
+        echo "<div style='border:2px solid red;padding:6px;margin:4px;display:inline-block'>$text</div>";
+    }
+
+    if($value !== "error"){
+        if($value >= $max_value || $value < $min_value){
+            break;
+        }
+    }
+
+    $currentX += $step;
+
+}
+
+if($type == 'B') echo "</ul>";
+if($type == 'C') echo "</ol>";
+if($type == 'D') echo "</table>";
+if($type == 'E') echo "</div>";
+
+echo "<hr>";
+
+echo "<h3>Статистика</h3>";
+
+if($count > 0){
+
+    $avg = round($sum/$count,3);
+
+    echo "Количество значений: $count <br>";
+    echo "Сумма: ".round($sum,3)."<br>";
+    echo "Минимум: $min <br>";
+    echo "Максимум: $max <br>";
+    echo "Среднее: $avg <br>";
+
+}else{
+    echo "Нет корректных значений";
+}
+
+?>
+
 </section>
-
-<aside class="gallery">
-    <h3>Фотографии этапа</h3>
-
-    <?php
-        $sec = date("s");
-        $photo1 = ($sec % 2 == 0) ? "images/photo1.jpg" : "images/photo2.jpg";
-        $photo2 = ($sec % 2 == 0) ? "images/photo3.jpg" : "images/photo4.jpg";
-    ?>
-
-    <figure class="photo">
-        <img src="<?php echo $photo1; ?>" alt="Фото 1">
-    </figure>
-
-    <figure class="photo">
-        <img src="<?php echo $photo2; ?>" alt="Фото 2">
-    </figure>
-</aside>
 
 <?php include 'footer.php'; ?>
