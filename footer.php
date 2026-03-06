@@ -3,7 +3,7 @@
 <footer class="site-footer">
     <div class="footer-inner container">
         <p>
-            Сформировано <?php echo date("d.m.Y в H:i:s"); ?>
+            Количество нажатий: <?php echo $clicksCount ?>
         </p>
     </div>
 </footer>
