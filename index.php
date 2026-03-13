@@ -16,12 +16,14 @@ $structures = array(
 "A*B*C#D*E*F",
 "1*2*3#4*5*6",
 "PHP*HTML*CSS#JS*SQL*API",
-"Cat*Dog*Bird",
+"Cat*Dog",
 "Red*Green*Blue#Black*White*Gray",
 "A1*A2*A3#B1*B2*B3",
 "X*Y*Z",
 "One*Two*Three#Four*Five*Six",
 "Apple*Banana*Orange",
+"",
+"s",
 "Table*Row*Cell"
 );
 
@@ -41,7 +43,7 @@ function getTR($data, $columns)
         if(isset($cells[$i]))
             $html .= "<td>".$cells[$i]."</td>";
         else
-            $html .= "<td></td>";
+            $html .= "<td>ㅤ</td>";
     }
 
     $html .= "</tr>";
