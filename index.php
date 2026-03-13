@@ -1,5 +1,5 @@
 <?php
-$title = "Ильенков Иван Владленович, 241-351, ЛР 3 вар.6";
+$title = "Ильенков Иван Владленович, 241-351, ЛР 4 вар.6";
 $current = "index";
 include 'layout.php';
 ?>
@@ -8,56 +8,100 @@ include 'layout.php';
 
 <?php
 
-/* если предыдущего значения нет — создаем */
-if(!isset($_GET['store']))
-    $_GET['store'] = '';
+/* количество колонок */
+$columns = 3;
 
-/* если нажата кнопка */
-else if(isset($_GET['key']))
-    $_GET['store'] .= $_GET['key'];
+/* массив структур таблиц (минимум 10) */
+$structures = array(
+"A*B*C#D*E*F",
+"1*2*3#4*5*6",
+"PHP*HTML*CSS#JS*SQL*API",
+"Cat*Dog*Bird",
+"Red*Green*Blue#Black*White*Gray",
+"A1*A2*A3#B1*B2*B3",
+"X*Y*Z",
+"One*Two*Three#Four*Five*Six",
+"Apple*Banana*Orange",
+"Table*Row*Cell"
+);
 
-$result = $_GET['store'];
+
+/* функция формирования строки таблицы */
+function getTR($data, $columns)
+{
+    $cells = explode('*', $data);
+
+    if(count($cells) == 0 || $cells[0] == '')
+        return '';
+
+    $html = "<tr>";
+
+    for($i = 0; $i < $columns; $i++)
+    {
+        if(isset($cells[$i]))
+            $html .= "<td>".$cells[$i]."</td>";
+        else
+            $html .= "<td></td>";
+    }
+
+    $html .= "</tr>";
+
+    return $html;
+}
 
 
-/* ===== СЧЕТЧИК НАЖАТИЙ ===== */
+/* функция вывода таблицы */
+function outTable($structure, $columns)
+{
+    $rows = explode('#', $structure);
 
-/* если счетчик уже есть */
-if(isset($_GET['counter']))
-    $clicks = (int)$_GET['counter'];
+    if(count($rows) == 0)
+    {
+        echo "В таблице нет строк";
+        return;
+    }
+
+    $tableRows = "";
+
+    for($i = 0; $i < count($rows); $i++)
+    {
+        $tr = getTR($rows[$i], $columns);
+
+        if($tr != "")
+            $tableRows .= $tr;
+    }
+
+    if($tableRows == "")
+    {
+        echo "В таблице нет строк с ячейками";
+        return;
+    }
+
+    echo "<table border='1'>";
+    echo $tableRows;
+    echo "</table>";
+}
+
+
+/* проверка количества колонок */
+if($columns == 0)
+{
+    echo "Неправильное число колонок";
+}
 else
-    $clicks = 0;
-
-/* если нажата кнопка — увеличиваем */
-if(isset($_GET['key']))
-    $clicks++;
+{
+    /* вывод всех таблиц */
+    for($i = 0; $i < count($structures); $i++)
+    {
+        echo "<h2>Таблица №".($i+1)."</h2>";
+        outTable($structures[$i], $columns);
+    }
+}
 
 ?>
-
-<div class="result">
-<?php echo $result; ?>
-</div>
-
-<div class="keyboard">
-
-<a href="?key=1&store=<?php echo $result; ?>&counter=<?php echo $clicks; ?>">1</a>
-<a href="?key=2&store=<?php echo $result; ?>&counter=<?php echo $clicks; ?>">2</a>
-<a href="?key=3&store=<?php echo $result; ?>&counter=<?php echo $clicks; ?>">3</a>
-<a href="?key=4&store=<?php echo $result; ?>&counter=<?php echo $clicks; ?>">4</a>
-<a href="?key=5&store=<?php echo $result; ?>&counter=<?php echo $clicks; ?>">5</a>
-
-<a href="?key=6&store=<?php echo $result; ?>&counter=<?php echo $clicks; ?>">6</a>
-<a href="?key=7&store=<?php echo $result; ?>&counter=<?php echo $clicks; ?>">7</a>
-<a href="?key=8&store=<?php echo $result; ?>&counter=<?php echo $clicks; ?>">8</a>
-<a href="?key=9&store=<?php echo $result; ?>&counter=<?php echo $clicks; ?>">9</a>
-<a href="?key=0&store=<?php echo $result; ?>&counter=<?php echo $clicks; ?>">0</a>
-
-<a class="reset" href="index.php?counter=<?php echo $clicks; ?>">СБРОС</a>
-
-</div>
 
 </section>
 
 <?php 
-$clicksCount = $clicks;
 include 'footer.php'; 
 ?>
