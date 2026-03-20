@@ -31,16 +31,22 @@ $menu = [
         <h1>Новости Формулы 1</h1>
 
         <nav class="main-nav">
-            <?php foreach ($menu as $key => $value): ?>
-                
-                <a 
-                    href="<?php echo $key; ?>.php"
-                    class="nav-link <?php echo ($current == $key) ? 'active' : ''; ?>">
-                    
-                    <?php echo $value; ?>
+            <?php
+            $html_type = $_GET['html_type'] ?? null;
+            $content = $_GET['content'] ?? null;
+            ?>
+
+            <div class="lab-menu">
+                <a href="?html_type=TABLE<?php if($content) echo '&content='.$content; ?>"
+                class="<?php echo ($html_type == 'TABLE') ? 'active' : ''; ?>">
+                    Табличная верстка
                 </a>
 
-            <?php endforeach; ?>
+                <a href="?html_type=DIV<?php if($content) echo '&content='.$content; ?>"
+                class="<?php echo ($html_type == 'DIV') ? 'active' : ''; ?>">
+                    Блочная верстка
+                </a>
+            </div>
         </nav>
 
     </div>  
