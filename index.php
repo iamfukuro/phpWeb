@@ -31,9 +31,8 @@ function outNumAsLink($x){
 
     $link = '?content='.$x;
 
-    if($html_type){
-        $link .= '&html_type='.$html_type;
-    }
+
+    // $link .= '&html_type='.$html_type;
 
     if($x <= 9)
         return '<a href="'.$link.'">'.$x.'</a>';
