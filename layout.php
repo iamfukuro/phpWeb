@@ -35,18 +35,6 @@ $menu = [
             $html_type = $_GET['html_type'] ?? null;
             $content = $_GET['content'] ?? null;
             ?>
-
-            <div class="lab-menu">
-                <a href="?html_type=TABLE<?php if($content) echo '&content='.$content; ?>"
-                class="<?php echo ($html_type == 'TABLE') ? 'active' : ''; ?>">
-                    Табличная верстка
-                </a>
-
-                <a href="?html_type=DIV<?php if($content) echo '&content='.$content; ?>"
-                class="<?php echo ($html_type == 'DIV') ? 'active' : ''; ?>">
-                    Блочная верстка
-                </a>
-            </div>
         </nav>
 
     </div>  
