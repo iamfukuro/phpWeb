@@ -194,3 +194,51 @@ header a {
 
 }
 .site-footer p{ margin:0; font-size:13px; }
+
+.container {
+    max-width: 800px;
+    margin: auto;
+}
+
+textarea {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+}
+
+.source-text {
+    color: #2c3e50;
+    font-style: italic;
+    background: #f4f6f7;
+    padding: 10px;
+    border-left: 5px solid #3498db;
+    margin-bottom: 20px;
+}
+
+.error {
+    color: red;
+    font-weight: bold;
+}
+
+.result-table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.result-table th,
+.result-table td {
+    border: 1px solid #999;
+    padding: 8px;
+}
+
+.result-table th {
+    background: #ddd;
+}
+
+.btn {
+    padding: 10px 15px;
+    background: #3498db;
+    color: white;
+    text-decoration: none;
+}
