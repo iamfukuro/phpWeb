@@ -1,15 +1,26 @@
 <?php
+session_start();
+
+// Инициализация истории и счётчика обновлений
+if (!isset($_SESSION['history'])) {
+    $_SESSION['history'] = [];
+}
+if (!isset($_SESSION['iteration'])) {
+    $_SESSION['iteration'] = 0;
+}
+$_SESSION['iteration']++;
+
 date_default_timezone_set('Europe/Moscow');
 
 if (!isset($title)) {
-    $title = "Ильенков Иван Владленович, 241-351 | Лабораторная 9 - Основы баз данных и использования программных модулей. Записная книжка.";
+    $title = "Ильенков Иван Владленович, 241-351 | Арифметический калькулятор";
 }
 
 if (!isset($current)) {
     $current = "";
 }
 
-/* Массив меню */
+/* Массив меню (не используется, но оставлен) */
 $menu = [
     "index" => "Главная",
     "race"  => "Гонка",
@@ -28,15 +39,8 @@ $menu = [
 
 <header class="site-header">
     <div class="container header-inner">
-        <h1>Новости Формулы 1</h1>
-
-        <nav class="main-nav">
-            <?php
-            $html_type = $_GET['html_type'] ?? null;
-            $content = $_GET['content'] ?? null;
-            ?>
-        </nav>
-
+        <h1>Арифметический калькулятор</h1>
+        <nav class="main-nav"></nav>
     </div>  
 </header>
 

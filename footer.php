@@ -3,23 +3,19 @@
 <footer class="site-footer">
     <div class="footer-inner container">
         <?php
-        $html_type = $_GET['html_type'] ?? null;
-        $content = $_GET['content'] ?? null;
-
-        if(!$html_type || $html_type == 'TABLE')
-            $type = "Табличная верстка";
-        else
-            $type = "Блочная верстка";
-
-        if(!$content)
-            $view = "Вся таблица";
-        else
-            $view = "Таблица на ".$content;
+        // Вывод истории вычислений (только если есть записи)
+        if (!empty($_SESSION['history'])) {
+            echo '<div class="history-block">';
+            echo '<h4>История вычислений</h4>';
+            foreach ($_SESSION['history'] as $historyLine) {
+                echo '<div class="history-line">' . htmlspecialchars($historyLine) . '</div>';
+            }
+            echo '</div>';
+        }
         ?>
 
         <p>
-            <?php echo $type . " | " . $view; ?><br>
-            <?php echo date('d.m.Y H:i:s'); ?><br>
+            <?php echo date('d.m.Y H:i:s'); ?>
         </p>
     </div>
 </footer>
