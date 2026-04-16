@@ -29,10 +29,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['action']) && $_POST['a
     
     mysqli_query($mysqli, $sql);
     
-    // Перенаправляем, чтобы обновить форму
     header("Location: /?p=edit&id={$id}");
     exit;
 }
+
+// ===== ИНИЦИАЛИЗАЦИЯ ПЕРЕМЕННОЙ =====
+$currentContact = null;
 
 // Определяем текущую запись
 $currentId = isset($_GET['id']) ? (int)$_GET['id'] : 0;
@@ -42,35 +44,41 @@ if ($currentId > 0) {
     $currentContact = mysqli_fetch_assoc($res);
 }
 
-// Если нет текущей записи или id не передан - берем первую
+// ===== ЕСЛИ ЗАПИСЬ НЕ ВЫБРАНА - БЕРЁМ ПЕРВУЮ ПОСЛЕ СОРТИРОВКИ ПО ФАМИЛИИ И ИМЕНИ =====
 if (!$currentContact) {
-    $res = mysqli_query($mysqli, "SELECT * FROM contacts ORDER BY id LIMIT 1");
+    // ВАЖНО! Сортировка по фамилии, затем по имени (как в списке слева)
+    $res = mysqli_query($mysqli, "SELECT * FROM contacts ORDER BY surname, name LIMIT 1");
     $currentContact = mysqli_fetch_assoc($res);
     if ($currentContact) {
         $currentId = $currentContact['id'];
     }
 }
 
-// Получаем все контакты для списка
-$res = mysqli_query($mysqli, "SELECT id, surname, name FROM contacts ORDER BY surname, name");
+// Получаем все контакты для списка (сортировка по фамилии, затем по имени)
+$res = mysqli_query($mysqli, "SELECT id, surname, name, patronymic FROM contacts ORDER BY surname, name");
 ?>
 
 <div class="edit-container">
     <div class="contact-list">
         <h3>Список контактов</h3>
         <?php
-        while ($row = mysqli_fetch_assoc($res)) {
-            $initials = mb_substr($row['name'], 0, 1) . '.';
-            $displayName = $row['surname'] . ' ' . $initials;
-            
-            if ($row['id'] == $currentId) {
-                echo "<div class='selected-contact'>{$displayName}</div>";
-            } else {
-                echo "<a href='/?p=edit&id={$row['id']}' class='contact-link'>{$displayName}</a>";
+        if (mysqli_num_rows($res) > 0) {
+            while ($row = mysqli_fetch_assoc($res)) {
+                // Формируем инициалы (только имя, без отчества)
+                $firstLetter = '';
+                if (!empty($row['name'])) {
+                    $firstLetter = iconv_substr($row['name'], 0, 1, 'UTF-8') . '.';
+                }
+                
+                $displayName = $row['surname'] . ' ' . $firstLetter;
+                
+                if ($row['id'] == $currentId) {
+                    echo "<div class='selected-contact'>{$displayName}</div>";
+                } else {
+                    echo "<a href='/?p=edit&id={$row['id']}' class='contact-link'>{$displayName}</a>";
+                }
             }
-        }
-        
-        if (mysqli_num_rows($res) == 0) {
+        } else {
             echo '<div class="info">Нет контактов для редактирования</div>';
         }
         ?>
@@ -78,7 +86,7 @@ $res = mysqli_query($mysqli, "SELECT id, surname, name FROM contacts ORDER BY su
     
     <div class="edit-form">
         <h3>Редактирование контакта</h3>
-        <?php if ($currentContact): ?>
+        <?php if ($currentContact && !empty($currentContact)): ?>
         <form method="post" class="contact-form">
             <input type="hidden" name="action" value="edit">
             <input type="hidden" name="id" value="<?= $currentContact['id'] ?>">
