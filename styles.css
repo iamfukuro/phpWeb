@@ -1,28 +1,342 @@
 /* ===== БАЗА ===== */
 
-body {
+* {
     margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
     font-family: Arial, sans-serif;
     background: #0b1d1b;
     color: white;
+    padding-top: 72px; /* отступ под фиксированный header */
+    padding-bottom: 56px; /* отступ под фиксированный footer */
 }
 
-/* ===== КОНТЕЙНЕР ===== */
+/* ===== ХЕДЕР ===== */
+
+.site-header {
+    background: #0a3b2e;
+    color: #ffffff;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 72px;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.45);
+}
+
+.header-inner {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.site-header h1 {
+    font-size: 18px;
+    font-weight: 600;
+    margin: 0;
+    white-space: nowrap;
+}
+
+/* ===== ОСНОВНОЙ КОНТЕНТ ===== */
+
+.content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    min-height: calc(100vh - 128px); /* 72px header + 56px footer */
+}
+
+/* ===== ФУТЕР ===== */
+
+.site-footer {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 56px;
+    background: #0a3b2e;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.6);
+    z-index: 900;
+}
+
+.footer-inner {
+    text-align: center;
+    font-size: 13px;
+}
+
+.footer-inner p {
+    margin: 0;
+}
+
+/* ===== КОНТЕЙНЕР (для совместимости) ===== */
 
 .container {
-    max-width: 600px;
-    margin: 40px auto;
+    max-width: 1200px;
+    margin: 0 auto;
     padding: 20px;
 }
 
-/* ===== ЗАГОЛОВКИ ===== */
+/* ===== ГЛАВНОЕ МЕНЮ ===== */
 
-h1, h2, h3 {
+#main-menu {
+    background: #1a4a3a;
+    padding: 15px;
     text-align: center;
+    border-radius: 8px;
     margin-bottom: 20px;
 }
 
-/* ===== ФОРМА ===== */
+#main-menu a {
+    display: inline-block;
+    background: #2d89ef;
+    color: white;
+    padding: 10px 20px;
+    margin: 0 5px;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: 0.2s;
+}
+
+#main-menu a:hover {
+    background: #1b5fbf;
+}
+
+#main-menu a.active {
+    background: #dc3545;
+    color: white;
+}
+
+/* ===== ПОДМЕНЮ ===== */
+
+#sub-menu {
+    margin-top: 15px;
+    padding-top: 10px;
+    border-top: 1px solid #2a6b55;
+}
+
+#sub-menu span {
+    color: #ccc;
+    margin-right: 10px;
+}
+
+#sub-menu a {
+    background: #3a7a6a;
+    padding: 5px 12px;
+    font-size: 13px;
+}
+
+#sub-menu a.active-sub {
+    background: #dc3545;
+}
+
+/* ===== ТАБЛИЦА КОНТАКТОВ ===== */
+
+.contacts-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #1a2a2a;
+    border-radius: 8px;
+    overflow-x: auto;
+    display: block;
+}
+
+.contacts-table th,
+.contacts-table td {
+    border: 1px solid #3a5a5a;
+    padding: 10px;
+    text-align: left;
+}
+
+.contacts-table th {
+    background: #2a4a3a;
+    font-weight: bold;
+}
+
+/* ===== ПАГИНАЦИЯ ===== */
+
+.pagination {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.pagination a,
+.pagination span {
+    display: inline-block;
+    padding: 8px 12px;
+    margin: 0 3px;
+    border: 1px solid #3a7a6a;
+    border-radius: 5px;
+    text-decoration: none;
+    color: white;
+}
+
+.pagination a:hover {
+    border: 2px solid #ffcc00;
+    padding: 7px 11px;
+}
+
+.pagination .current-page {
+    background: #dc3545;
+    border-color: #dc3545;
+}
+
+/* ===== ФОРМЫ ===== */
+
+.contact-form {
+    background: #1a2a2a;
+    padding: 20px;
+    border-radius: 10px;
+    margin: 20px 0;
+}
+
+.form-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.form-row label {
+    flex: 1;
+    min-width: 150px;
+}
+
+.contact-form input,
+.contact-form select,
+.contact-form textarea {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    border-radius: 5px;
+    border: none;
+    background: #2a3a3a;
+    color: white;
+}
+
+.contact-form button {
+    background: #2d89ef;
+    color: white;
+    padding: 10px 25px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.contact-form button:hover {
+    background: #1b5fbf;
+}
+
+/* ===== РЕДАКТИРОВАНИЕ ===== */
+
+.edit-container {
+    display: flex;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+.contact-list {
+    flex: 1;
+    min-width: 200px;
+    background: #1a2a2a;
+    padding: 15px;
+    border-radius: 8px;
+}
+
+.contact-list a,
+.contact-list div {
+    display: block;
+    padding: 8px 12px;
+    margin: 5px 0;
+    border-radius: 5px;
+    text-decoration: none;
+}
+
+.contact-list a {
+    background: #2d89ef;
+    color: white;
+}
+
+.contact-list a:hover {
+    background: #1b5fbf;
+}
+
+.contact-list .selected-contact {
+    background: #dc3545;
+    color: white;
+}
+
+.edit-form {
+    flex: 2;
+    min-width: 300px;
+}
+
+/* ===== УДАЛЕНИЕ ===== */
+
+.delete-container {
+    background: #1a2a2a;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.delete-link {
+    display: inline-block;
+    background: #dc3545;
+    color: white;
+    padding: 10px 15px;
+    margin: 5px;
+    border-radius: 5px;
+    text-decoration: none;
+}
+
+.delete-link:hover {
+    background: #a71d2a;
+}
+
+/* ===== СООБЩЕНИЯ ===== */
+
+.success {
+    background: #28a745;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    margin: 10px 0;
+    text-align: center;
+}
+
+.error {
+    background: #dc3545;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    margin: 10px 0;
+    text-align: center;
+}
+
+.info {
+    background: #17a2b8;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    margin: 10px 0;
+    text-align: center;
+}
+
+/* ===== СТАРЫЕ СТИЛИ (для совместимости) ===== */
 
 .form {
     max-width: 500px;
@@ -46,13 +360,11 @@ h1, h2, h3 {
     font-size: 14px;
 }
 
-/* textarea */
 .form textarea {
     resize: vertical;
     min-height: 80px;
 }
 
-/* кнопка */
 .form button {
     padding: 10px;
     border: none;
@@ -68,14 +380,6 @@ h1, h2, h3 {
     background: #1b5fbf;
 }
 
-/* ===== EMAIL BLOCK ===== */
-
-#mailBox {
-    display: none;
-}
-
-/* ===== РЕЗУЛЬТАТ ===== */
-
 .result {
     max-width: 600px;
     margin: 40px auto;
@@ -83,38 +387,22 @@ h1, h2, h3 {
     padding: 20px;
     border-radius: 10px;
     line-height: 1.7;
-    box-shadow: 0 0 10px rgba(0,0,0,0.4);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
 }
 
-/* строки внутри результата */
 .result div {
     margin-bottom: 8px;
 }
 
-/* подписи */
 .result b {
     display: inline-block;
     min-width: 180px;
 }
 
-/* ===== СТАТУС ===== */
-
 .ok {
     color: #4caf50;
     font-weight: bold;
 }
-
-.error {
-    color: #ff4d4d;
-    font-weight: bold;
-}
-
-.info {
-    margin-top: 10px;
-    color: #ccc;
-}
-
-/* ===== КНОПКА "ПОВТОРИТЬ" ===== */
 
 .btn {
     display: block;
@@ -133,79 +421,6 @@ h1, h2, h3 {
     background: #1b5fbf;
 }
 
-/* ===== ХЕДЕР (чтобы не ломался) ===== */
-
-header {
-    background: #0a3b2e;
-    color: #ffffff;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 72px;
-    z-index: 1000;
-    display: flex;
-    align-items: center;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.45);
-}   
-.header-inner{
-  width:100%;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:12px;
-}
-/* заголовок в шапке */
-.site-header h1{
-  font-size:16px;
-  font-weight:600;
-  color:var(--header-color);
-  margin:0;
-  padding-left:4px;
-}
-/* ===== КНОПКИ В ХЕДЕРЕ ===== */
-
-header a {
-    background: #ccc;
-    color: black;
-    padding: 6px 10px;
-    border-radius: 6px;
-    text-decoration: none;
-    margin-left: 10px;
-}
-
-.site-footer{
-  position: fixed;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  height: 56px;
-  background: #0a3b2e;
-  color: #ffffff;
-  display: flex;
-  align-items: center;
-  box-shadow: 0 -2px 10px rgba(0,0,0,0.6);
-  z-index: 900;
-}
-.site-footer .footer-inner{
-  width:100%;
-
-  margin:0 auto;
-
-}
-.site-footer p{ margin:0; font-size:13px; }
-
-.container {
-    max-width: 800px;
-    margin: auto;
-}
-
-textarea {
-    width: 100%;
-    padding: 10px;
-    font-size: 16px;
-}
-
 .source-text {
     color: #2c3e50;
     font-style: italic;
@@ -213,11 +428,6 @@ textarea {
     padding: 10px;
     border-left: 5px solid #3498db;
     margin-bottom: 20px;
-}
-
-.error {
-    color: red;
-    font-weight: bold;
 }
 
 .result-table {
@@ -234,11 +444,4 @@ textarea {
 
 .result-table th {
     background: #ddd;
-}
-
-.btn {
-    padding: 10px 15px;
-    background: #3498db;
-    color: white;
-    text-decoration: none;
 }
