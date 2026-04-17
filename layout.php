@@ -13,7 +13,7 @@ $_SESSION['iteration']++;
 date_default_timezone_set('Europe/Moscow');
 
 if (!isset($title)) {
-    $title = "Ильенков Иван Владленович, 241-351 | Арифметический калькулятор";
+    $title = "Ильенков Иван Владленович, 241-351, лаб 9 - Преобразование типов. Сессии. Калькулятор.";
 }
 
 if (!isset($current)) {

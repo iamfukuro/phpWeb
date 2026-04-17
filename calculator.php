@@ -154,7 +154,7 @@ $expressionValue = isset($_SESSION['last_expression']) ? $_SESSION['last_express
 ?>
 
 <div class="result-box">
-    <strong>Результат:</strong> <?php echo htmlspecialchars($resultText); ?>
+    <strong></strong> <?php echo htmlspecialchars($resultText); ?>
 </div>
 
 <form method="post" class="calculator-form">
